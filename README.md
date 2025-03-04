@@ -100,6 +100,17 @@ This does the following:
 - Use [Python Poetry](https://python-poetry.org) to build the Python environment
 - Build the [USalign](https://github.com/pylelab/USalign) executable
 
+## Production Docker Image
+
+process described above is well suited for development.  However, if you are deploying the RFAntibody pipeline to a production environment, it is better to have a docker image with all dependencies pre-installed.  The `production.Dockerfile` Dockerfile accomplishes this. It builds an image with all dependencies installed.  The RFAntibody source and scripts are installed in `/opt/rfantibody`.
+
+### Building production Docker Image
+
+```
+docker build -t rfantibody-production -f production.Dockerfile.
+```
+
+
 # Usage
 
 ## HLT File Format
@@ -142,8 +153,8 @@ The first step in RFantibody is to generate antibody-target docks using an antib
 ```
 # From inside of the rfantibody container
 
-poetry run python  /home/scripts/rfdiffusion_inference.py \
-  --config-path /home/src/rfantibody/rfdiffusion/config/inference \
+poetry run python  /opt/rfantibody/scripts/rfdiffusion_inference.py \
+  --config-path /opt/rfantibody/src/rfantibody/rfdiffusion/config/inference \
   --config-name antibody \
   antibody.target_pdb=/home/scripts/examples/example_inputs/rsv_site3.pdb \
   antibody.framework_pdb=/home/scripts/examples/example_inputs/hu-4D5-8_Fv.pdb \
