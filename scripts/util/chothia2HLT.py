@@ -33,15 +33,15 @@ def parse_args():
             - output: Optional output file path
     """
     parser = argparse.ArgumentParser(description='Convert Chothia-formatted PDB to HLT format')
-    parser.add_argument('input_pdb', help='Input PDB file in Chothia format')
-    parser.add_argument('--heavy', '-H', help='Heavy chain ID')
-    parser.add_argument('--light', '-L', help='Light chain ID')
-    parser.add_argument('--target', '-T', help='Target chain ID(s), comma-separated')
-    parser.add_argument('--output', '-o', help='Output HLT file path')
+    parser.add_argument('--input_pdb', '-i', type=str, help='Input PDB file in Chothia format')
+    parser.add_argument('--heavy', '-H', type=str, help='Heavy chain ID')
+    parser.add_argument('--light', '-L', type=str, help='Light chain ID')
+    parser.add_argument('--target', '-T', type=str, help='Target chain ID(s), comma-separated')
+    parser.add_argument('--output', '-o', type=str, help='Output HLT file path')
     parser.add_argument('--whole_fab', '-w', action='store_true', help='Keep entire Fab region')
-    parser.add_argument('--Hcrop', default=115, help='Chothia residue number to crop to for heavy chain a ' + \
+    parser.add_argument('--Hcrop', type=int, default=115, help='Chothia residue number to crop to for heavy chain a ' + \
                         'reasonable number is between 105 and 115')
-    parser.add_argument('--Lcrop', default=110, help='Chothia residue number to crop to for light chain a ' + \
+    parser.add_argument('--Lcrop', type=int, default=110, help='Chothia residue number to crop to for light chain a ' + \
                         'reasonable number is between 100 and 110')
 
     args = parser.parse_args()
